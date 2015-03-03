@@ -25,6 +25,9 @@ class Controller {
 	
 	public function setConfig($param, $value) {
 		$this->_config->$param = $value;
+		if( !file_exists(PATH_CONFIG) ) {
+			mkdir(PATH_CONFIG);
+		}
 		file_put_contents(PATH_CONFIG.'/system.json', json_encode($this->_config));
 	}
 	
