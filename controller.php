@@ -2,7 +2,7 @@
 
 class Controller {
 	protected $_config;
-	protected $_allowed_actions = array('setupClan'/*, 'storeMembersBallance'*/);
+	protected $_allowed_actions = array('setupClan', 'storeMembersBallance');
 	
 	public function __construct() {
 		// load config
