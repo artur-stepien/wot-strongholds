@@ -4,6 +4,7 @@
  * Return translated string. If there is no translation key is returned.
  * 
  * @global	Array	$_LANGUAGE	Translation array containing keys and its translations.
+ * 
  * @param	String	$key		Translation array key holding required translation
  * 
  * @return	String
@@ -18,6 +19,15 @@ function __($key) {
 	}
 }
 
+/**
+ * Return translated string using springf function. If there is no translation key is returned.
+ * 
+ * @global	Array	$_LANGUAGE	Translation array containing keys and its translations.
+ * 
+ * @param	String	$key		Translation array key holding required translation
+ * 
+ * @return	String
+ */
 function _s($key) {
 	global $_LANGUAGE;
 	
