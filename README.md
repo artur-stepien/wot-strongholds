@@ -30,3 +30,4 @@ I tried to make application as easy and user friendly as I could. So basicly wha
 - authentication via Wargaming api or http
 - test if server meets requirements
 - add period time setting in installation (minimum number of days required to calculate user income)
+- localization
