@@ -1,4 +1,4 @@
-# World of Tanks - Strongholds
+# World of Tanks - Strongholds 1.01 beta
 This is just a simple application made to track users income from World of Tanks strongholds skirmishes. For now only in Polish language but translations will be released in next version.
 
 ##What it does:
