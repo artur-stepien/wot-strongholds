@@ -36,12 +36,13 @@ require_once PATH.'/controller.php';
 
 $controller = new Controller();
 
+// check action permissions
 if( isset($_GET['action']) ) {
 	$action = $_GET['action'];
 	if( $controller->authorize($action) ) {
 		$controller->$action();
 	} else {
-		die('Akcja niedozwolona');
+		die(__('ACTION_DENIED'));
 	}
 }
 
@@ -49,7 +50,7 @@ if( isset($_GET['action']) ) {
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
-		<title>Strong Holds - <?php echo __('APPLICATION_TITLE') ?></title>
+		<title><?php echo __('APPLICATION_TITLE') ?></title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
