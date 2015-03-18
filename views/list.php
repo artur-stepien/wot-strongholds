@@ -71,25 +71,26 @@ $(document).ready(function(){
 
 <?php 
 $members = $controller->getMembers();
+$period_lenght = floor(($controller->getConfig('ballance_date_current',time())-$controller->getConfig('ballance_date_last',time()))/(60*60*24));
 ?>
 <form action="?action=storeMembersBallance" method="post">
 <table class="table table-bordered table-condensed table-hover tablesorter" id="clan-table">
 	<thead>
 		<tr>
 			<th style="width:1%" class="hidden-xs">#</th>
-			<th>Nazwa</th>
-			<th>Dołączył</th>
-			<th>Ostatnia bitwa</th>
+			<th><?php echo __('LIST_HEADER_PLAYER') ?></th>
+			<th><?php echo __('LIST_HEADER_JOINED') ?></th>
+			<th><?php echo __('LIST_HEADER_LAST_BATTLE') ?></th>
 			<th class="text-center hidden-xs hidden-sm">
-				Zasoby <br/><small>(ostatni stan)</small><br/>
+				<?php echo __('LIST_HEADER_RESOURCES_LAST') ?><br/>
 				<small><?php echo date('Y-m-d', $controller->getConfig('ballance_date_last',time())) ?></small>
 			</th>
 			<th class="text-center hidden-xs hidden-sm">
-				Zasoby <br/><small>(obecny stan)</small><br/>
+				<?php echo __('LIST_HEADER_RESOURCES_CURRENT') ?><br/>
 				<small><?php echo date('Y-m-d', $controller->getConfig('ballance_date_current',time())) ?></small>
 			</th>
-			<th class="text-center">Przychód <br/><small class="hidden-xs hidden-sm">(ostatni z <?php echo floor(($controller->getConfig('ballance_date_current',time())-$controller->getConfig('ballance_date_last',time()))/(60*60*24)) ?> dni)</small></th>
-			<th>Zaktualizuj stan</th>
+			<th class="text-center"><?php echo _s('LIST_HEADER_RESOURCES_INCOME', $period_lenght) ?></th>
+			<th><?php echo __('LIST_HEADER_RESOURCES_UPDATE') ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -121,7 +122,7 @@ $members = $controller->getMembers();
 			</td>
 			<td class="text-right"><?php echo number_format(($member->resources_current - $member->resources_last),0,null,',') ?></td>
 			<td class="text-center">
-				<input class="form-control" name="ballance[<?php echo $member->account_id ?>]" type="text" value="" size="5" tabindex="<?php echo $idx+1 ?>" required="required" placeholder="Wpisz aktualny stan konta"/>
+				<input class="form-control" name="ballance[<?php echo $member->account_id ?>]" type="text" value="" size="5" tabindex="<?php echo $idx+1 ?>" required="required" placeholder="<?php echo __('LIST_BALLANCE_PLACEHOLDER') ?>"/>
 			</td>
 		</tr>
 	<?php endforeach ?>
@@ -135,8 +136,10 @@ $members = $controller->getMembers();
 		<td class="hidden-xs hidden-sm"></td>
 		<td class="text-right"><?php echo number_format($monthly,0,null,',') ?></td>
 		<td class="text-center">
-			<input type="submit" class="btn btn-primary" value="Aktualizuj stan"/>
+			<input type="submit" class="btn btn-primary" value="<?php echo __('LIST_BUTTON_UPDATE') ?>"/>
 		</td>
 	</tfoot>
 </table>
+<footer class="text-center"><small class="copyrights"><?php echo '&copy; ',date('Y'),' ',__('COPYRIGHTS') ?>, </small><small class="version"><?php echo _s('VERSION', VERSION) ?></small></footer>
+<p></p>
 </form>

@@ -7,22 +7,42 @@ error_reporting(-1);
 // disable cache
 header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() - 3600));
 
+// defines
+define('VERSION', '1.01 beta');
 define('PATH', dirname(__FILE__));
 define('PATH_CONFIG', PATH.'/config');
 define('PATH_SQL', PATH.'/sql');
 define('PATH_VIEWS', PATH.'/views');
+define('PATH_LANGUAGE', PATH.'/language');
 
-require_once PATH.'/api/api.php';
-require_once 'controller.php';
+// determinate language using browser language
+global $_LANGUAGE_CODE;
+$_LANGUAGE_CODE = current(explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']));
+
+// chose language
+$language_file = PATH_LANGUAGE.'/'.$_LANGUAGE_CODE.'.ini';
+if( !file_exists(PATH_LANGUAGE.'/'.$_LANGUAGE_CODE.'.ini') ) {
+	$language_file = PATH_LANGUAGE.'/en.ini';
+	$language_code = 'en';
+}
+
+// load language
+global $_LANGUAGE;
+$_LANGUAGE = parse_ini_file($language_file);
+
+require_once PATH.'/includes/functions.php';
+require_once PATH.'/includes/api/api.php';
+require_once PATH.'/controller.php';
 
 $controller = new Controller();
 
+// check action permissions
 if( isset($_GET['action']) ) {
 	$action = $_GET['action'];
 	if( $controller->authorize($action) ) {
 		$controller->$action();
 	} else {
-		die('Akcja niedozwolona');
+		die(__('ACTION_DENIED'));
 	}
 }
 
@@ -30,7 +50,7 @@ if( isset($_GET['action']) ) {
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
-		<title>Strong Holds Resources</title>
+		<title><?php echo __('APPLICATION_TITLE') ?></title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
