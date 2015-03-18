@@ -8,7 +8,7 @@ error_reporting(-1);
 header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() - 3600));
 
 // defines
-define('VERSION', '1.01 beta');
+define('VERSION', '1.1 dev');
 define('PATH', dirname(__FILE__));
 define('PATH_CONFIG', PATH.'/config');
 define('PATH_SQL', PATH.'/sql');
