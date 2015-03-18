@@ -1,5 +1,8 @@
-# World of Tanks - Strongholds 1.01 beta
+# World of Tanks - Strongholds 1.1 dev
 This is just a simple application made to track users income from World of Tanks strongholds skirmishes. For now only in Polish language but translations will be released in next version.
+
+## Changelog:
+- Added translation in Polish and English language
 
 ##What it does:
 - show last battle time
@@ -30,4 +33,4 @@ I tried to make application as easy and user friendly as I could. So basicly wha
 - authentication via Wargaming api or http
 - test if server meets requirements
 - add period time setting in installation (minimum number of days required to calculate user income)
-- localization
+~~- localization~~
